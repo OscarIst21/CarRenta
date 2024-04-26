@@ -1,4 +1,4 @@
-
+//jaoas
 public class Carro {
 	String marca,modelo,transmision,imagen;
 	double precio;
