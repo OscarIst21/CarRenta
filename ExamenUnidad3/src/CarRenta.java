@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.BorderLayout;
@@ -15,7 +16,6 @@ import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
@@ -29,6 +29,10 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.ComboBoxModel;
+import java.awt.GridBagLayout;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class CarRenta extends JFrame {
 	private JScrollBar scrollBar = new JScrollBar();
@@ -62,6 +66,7 @@ public class CarRenta extends JFrame {
 	private JLabel lblNewLabel_20;
 	private List<Carro> deportivosCompactos = new ArrayList<>();
 	private List<Carro> muscleCars = new ArrayList<>();
+	private List<Carro> deportivos = new ArrayList<>();
 	private JLabel lblNewLabel_21;
 	private JLabel lblNewLabel_23;
 	private JLabel lblNewLabel_24;
@@ -77,8 +82,18 @@ public class CarRenta extends JFrame {
 	private JTextField textField_1;
 	private JButton btnNewButton_7;
 	private JTextField textField_3;
-	private JButton btnNewButton_8;
 	private JButton btnNewButton_9;
+	private JPanel panel_1;
+	private JButton btnNewButton_10;
+	private JButton btnNewButton_8;
+	private JLabel lblNewLabel_32;
+	private JLabel lblNewLabel_33;
+	private JLabel lblNewLabel_35;
+	private JLabel lblNewLabel_36; 
+    private JTextField fechaInicialField;
+    private JTextField fechaFinalField;
+    private JPanel panel_2;
+    private JLabel lblNewLabel_37;
 	/**
 	 * Launch the application.
 	 */
@@ -100,17 +115,24 @@ public class CarRenta extends JFrame {
 	 */
 	public void iniciarCarros() {
 		
-		deportivosCompactos.add(new Carro("Toyota", "Celica", "Manual", 2, 1, 550.00, getClass().getResource("celicaC.jpg").getPath()));
-		deportivosCompactos.add(new Carro("Honda", "Civic", "Automatico", 2, 1, 500.00, "hondaCivic.jpg"));
-		deportivosCompactos.add(new Carro("Mini", "Copper", "Manual", 2, 1, 610.00, "miniCopper.jpg"));
-		deportivosCompactos.add(new Carro("Hyundai", "Tiburon", "Manual", 2, 1, 550.00, "tiburon.jpg"));
-		deportivosCompactos.add(new Carro("Hyundai", "Tiburon", "Manual", 2, 1, 550.00, "tiburon.jpg"));
+		deportivosCompactos.add(new Carro("Toyota", "Celica", "Manual", 2, 1, 550.00,getClass().getResource("celicaC.jpg").getPath()));
+		deportivosCompactos.add(new Carro("Honda", "Civic", "Automatico", 2, 1, 500.00,getClass().getResource("hondaCivic.jpg").getPath()));
+		deportivosCompactos.add(new Carro("Mini", "Copper", "Manual", 2, 1, 610.00, getClass().getResource("miniCopper.jpg").getPath()));
+		deportivosCompactos.add(new Carro("Hyundai", "Tiburon", "Manual", 2, 1, 550.00, getClass().getResource("tiburon.jpg").getPath()));
+		deportivosCompactos.add(new Carro("Mazda", "MX-5 Miata", "Automatico", 2, 1, 550.00, getClass().getResource("miata.jpg").getPath()));
 
-		muscleCars.add(new Carro("pene", "Celica", "Manual", 2, 1, 550.00, "celicaC.jpg"));
-		muscleCars.add(new Carro("Honda", "Civic", "Automatico", 2, 1, 500.00, "hondaCivic.jpg"));
-		muscleCars.add(new Carro("Toyota", "Celica", "Manual", 2, 1, 550.00, "celicaC.jpg"));
-		muscleCars.add(new Carro("Toyota", "Celica", "Manual", 2, 1, 550.00, "celicaC.jpg"));
-		
+		muscleCars.add(new Carro("Ford", "Mustang", "Manual", 2, 1, 800.00, "mustang.jpg"));
+		muscleCars.add(new Carro("Chevrolet", "Camaro", "Automático", 2, 1, 750.00, "camaro.jpg"));
+		muscleCars.add(new Carro("Dodge", "Challenger", "Manual", 2, 1, 820.00, "challenger.jpg"));
+		muscleCars.add(new Carro("Plymouth", "Barracuda", "Manual", 2, 1, 830.00, "barracuda.jpg"));
+		muscleCars.add(new Carro("Chevrolet", "Chevelle", "Automático", 2, 1, 790.00, "chevelle.jpg"));
+
+		deportivos.add(new Carro("Chevrolet", "Corvette", "Manual", 2, 1, 900.00, "corvette.jpg"));
+		deportivos.add(new Carro("Ford", "Mustang", "Manual", 2, 1, 850.00, "mustang.jpg"));
+		deportivos.add(new Carro("Dodge", "Challenger", "Automático", 2, 1, 750.00, "challenger.jpg"));
+		deportivos.add(new Carro("Nissan", "GT-R", "Automático", 2, 1, 1000.00, "gtr.jpg"));
+		deportivos.add(new Carro("BMW", "M4", "Automático", 2, 1, 950.00, "bmw_m4.jpg"));
+
 		
 	}
 	public CarRenta() {
@@ -118,6 +140,7 @@ public class CarRenta extends JFrame {
 		setBounds(100, 100, 1200, 720);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		iniciarCarros();
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -129,11 +152,75 @@ public class CarRenta extends JFrame {
 		contentPane.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		
-		iniciarCarros();
-		deportivosCompactosPanel();
-		//inicio();
+
+		panelPrincipal.setBackground(new Color(89, 89, 89));
+		lblNewLabel_19 = new JLabel("KING");
+		lblNewLabel_19.setForeground(new Color(155, 43, 33));
+		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_19.setBounds(107, 19, 71, 33);
+		panelPrincipal.add(lblNewLabel_19);
 		
-       
+		JLabel lblNewLabel_6 = new JLabel("      FAST");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_6.setBackground(new Color(0, 0, 0));
+		lblNewLabel_6.setForeground(new Color(255, 255, 255));
+		lblNewLabel_6.setBounds(0, 0, 1174, 70);
+		lblNewLabel_6.setOpaque(true);
+		panelPrincipal.add(lblNewLabel_6);
+		
+		lblNewLabel_32 = new JLabel("New label");
+		lblNewLabel_32.setBorder(new LineBorder(Color.black, 5));
+		lblNewLabel_32.setIcon(new ImageIcon("C:\\Users\\Oscar\\Downloads\\CarRenta-main\\ExamenUnidad3\\src\\dodgechallenger.jpg"));
+		lblNewLabel_32.setBounds(60, 166, 267, 193);
+		panelPrincipal.add(lblNewLabel_32);
+		
+		lblNewLabel_33 = new JLabel("   Uswer");
+		lblNewLabel_33.setBorder(new LineBorder(Color.black, 1));
+		lblNewLabel_33.setForeground(new Color(255, 255, 255));
+		lblNewLabel_33.setBackground(new Color(31, 32, 38 ));
+		lblNewLabel_33.setOpaque(true);
+		lblNewLabel_33.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_33.setBounds(362, 166, 283, 53);
+		panelPrincipal.add(lblNewLabel_33);
+		
+		lblNewLabel_35 = new JLabel("   Fecha inicial");
+		lblNewLabel_35.setOpaque(true);
+		lblNewLabel_35.setForeground(Color.WHITE);
+		lblNewLabel_35.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_35.setBorder(new LineBorder(Color.black, 1));
+		lblNewLabel_35.setBackground(new Color(31, 32, 38));
+		lblNewLabel_35.setBounds(362, 310, 283, 49);
+		panelPrincipal.add(lblNewLabel_35);
+
+		lblNewLabel_36 = new JLabel("<html>Incluido en la reservación<br>Cobertura contra daños al vehículo<br>Protección Contra Terceros<br>Cobertura contra robo<br>El mejor precio garantizado<br>Kilometraje libre<br>Tarifas de la compañía de renta<br>Sin tarifas por cambios</html>");
+		lblNewLabel_36.setForeground(new Color(255, 255, 255));
+		lblNewLabel_36.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_36.setBounds(60, 364, 267, 181);
+		panelPrincipal.add(lblNewLabel_36);
+		
+		panel_2 = new JPanel();
+		panel_2.setBounds(474, 236, 171, 38);
+		panelPrincipal.add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JComboBox comboBox_4 = new JComboBox();
+		panel_2.add(comboBox_4);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		panel_2.add(comboBox_5);
+		
+		JComboBox comboBox = new JComboBox();
+		panel_2.add(comboBox);
+		
+		lblNewLabel_37 = new JLabel("   Fecha inicial");
+		lblNewLabel_37.setOpaque(true);
+		lblNewLabel_37.setForeground(Color.WHITE);
+		lblNewLabel_37.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_37.setBorder(new LineBorder(Color.black, 1));
+		lblNewLabel_37.setBackground(new Color(31, 32, 38));
+		lblNewLabel_37.setBounds(362, 236, 283, 49);
+		panelPrincipal.add(lblNewLabel_37);
+		
 	}
 	
 	public void scrollPanel() {
@@ -306,9 +393,15 @@ public class CarRenta extends JFrame {
 		lblNewLabel_17.setBounds(996, 9, 135, 56);
 		panelPrincipal.add(lblNewLabel_17);
 		
-		JLabel lblNewLabel_6 = new JLabel("      FASTKING");
+		lblNewLabel_19 = new JLabel("KING");
+		lblNewLabel_19.setForeground(new Color(155, 43, 33));
+		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_19.setBounds(107, 19, 71, 33);
+		panelPrincipal.add(lblNewLabel_19);
+		
+		JLabel lblNewLabel_6 = new JLabel("      FAST");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_6.setBackground(new Color(155, 43, 33));
+		lblNewLabel_6.setBackground(new Color(0, 0, 0));
 		lblNewLabel_6.setForeground(new Color(255, 255, 255));
 		lblNewLabel_6.setBounds(0, 0, 1174, 70);
 		lblNewLabel_6.setOpaque(true);
@@ -537,8 +630,7 @@ public class CarRenta extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                 	panelPrincipal.removeAll();
-    				
-                    menu();
+        	        editarCarro(carro);
                     repaint();
                 }
             });
@@ -716,30 +808,30 @@ public class CarRenta extends JFrame {
 		lblNewLabel_23 = new JLabel("Nuevo Vehículo");
 		lblNewLabel_23.setForeground(new Color(0, 0, 0));
 		lblNewLabel_23.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_23.setBounds(489, 86, 201, 33);
+		lblNewLabel_23.setBounds(506, 89, 201, 33);
 		panelPrincipal.add(lblNewLabel_23);
 		
 		lblNewLabel_24 = new JLabel("Marca:");
 		lblNewLabel_24.setForeground(Color.BLACK);
 		lblNewLabel_24.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_24.setBounds(489, 171, 87, 33);
+		lblNewLabel_24.setBounds(318, 171, 87, 33);
 		panelPrincipal.add(lblNewLabel_24);
 		
 		lblNewLabel_25 = new JLabel("Modelo:");
 		lblNewLabel_25.setForeground(Color.BLACK);
 		lblNewLabel_25.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_25.setBounds(476, 222, 100, 33);
+		lblNewLabel_25.setBounds(305, 227, 100, 33);
 		panelPrincipal.add(lblNewLabel_25);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(597, 227, 172, 35);
+		textField_2.setBounds(415, 227, 172, 35);
 		panelPrincipal.add(textField_2);
 		
 		lblNewLabel_26 = new JLabel("Trasmisión:");
 		lblNewLabel_26.setForeground(Color.BLACK);
 		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_26.setBounds(429, 278, 147, 33);
+		lblNewLabel_26.setBounds(258, 286, 147, 33);
 		panelPrincipal.add(lblNewLabel_26);
 		
 		String[] marcasCarros = {"     ",
@@ -751,56 +843,56 @@ public class CarRenta extends JFrame {
 			};
         JComboBox comboBox = new JComboBox(new DefaultComboBoxModel(marcasCarros));
         comboBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        comboBox.setBounds(597, 173, 165, 33);
+        comboBox.setBounds(415, 173, 172, 33);
         panelPrincipal.add(comboBox);
         String[] trasmision= {"     ","Manual","Automatica"};
         comboBox_1 = new JComboBox(new DefaultComboBoxModel(trasmision));
         comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        comboBox_1.setBounds(597, 273, 172, 46);
+        comboBox_1.setBounds(415, 287, 172, 35);
         panelPrincipal.add(comboBox_1);
         
         lblNewLabel_27 = new JLabel("N. Puertas:");
         lblNewLabel_27.setForeground(Color.BLACK);
         lblNewLabel_27.setFont(new Font("Tahoma", Font.BOLD, 25));
-        lblNewLabel_27.setBounds(439, 335, 147, 33);
+        lblNewLabel_27.setBounds(266, 343, 139, 33);
         panelPrincipal.add(lblNewLabel_27);
         String[] puertas= {"   ","2","4"};
         comboBox_2 = new JComboBox(new DefaultComboBoxModel(puertas));
         comboBox_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-        comboBox_2.setBounds(597, 330, 172, 46);
+        comboBox_2.setBounds(415, 350, 172, 35);
         panelPrincipal.add(comboBox_2);
         
         lblNewLabel_28 = new JLabel("N. Equipaje:");
         lblNewLabel_28.setForeground(Color.BLACK);
-        lblNewLabel_28.setFont(new Font("Tahoma", Font.BOLD, 25));
-        lblNewLabel_28.setBounds(429, 400, 158, 33);
+        lblNewLabel_28.setFont(new Font("Tahoma", Font.BOLD, 22));
+        lblNewLabel_28.setBounds(644, 228, 139, 33);
         panelPrincipal.add(lblNewLabel_28);
         String[] equipaje= {"  ","1","2"};
         comboBox_3 = new JComboBox(new DefaultComboBoxModel(equipaje));
         comboBox_3.setFont(new Font("Tahoma", Font.BOLD, 20));
-        comboBox_3.setBounds(597, 395, 172, 46);
+        comboBox_3.setBounds(793, 227, 172, 35);
         panelPrincipal.add(comboBox_3);
         
-        lblNewLabel_29 = new JLabel("Precio MNX:");
+        lblNewLabel_29 = new JLabel("Precio/día MXN:");
         lblNewLabel_29.setForeground(Color.BLACK);
-        lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 25));
-        lblNewLabel_29.setBounds(429, 457, 158, 33);
+        lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblNewLabel_29.setBounds(619, 173, 172, 33);
         panelPrincipal.add(lblNewLabel_29);
         
         textField_1 = new JTextField();
         textField_1.setColumns(10);
-        textField_1.setBounds(597, 455, 172, 35);
+        textField_1.setBounds(793, 172, 172, 33);
         panelPrincipal.add(textField_1);
         
         
         textField_3 = new JTextField();
         textField_3.setEditable(false);
         textField_3.setColumns(10);
-        textField_3.setBounds(597, 501, 172, 35);
+        textField_3.setBounds(793, 287, 172, 35);
         panelPrincipal.add(textField_3);
         
         btnNewButton_7 = new JButton("Seleccionar Imagen");
-        btnNewButton_7.setBounds(440, 501, 147, 35);
+        btnNewButton_7.setBounds(636, 287, 147, 35);
         btnNewButton_7.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -817,6 +909,11 @@ public class CarRenta extends JFrame {
         panelPrincipal.add(btnNewButton_7);
         
         btnNewButton_8 = new JButton("Regresar");
+        btnNewButton_8.setForeground(Color.WHITE);
+		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_8.setFocusable(false);
+		btnNewButton_8.setBackground(new Color(155, 43, 33));
+		btnNewButton_8.setBounds(41, 81, 118, 52);
         btnNewButton_8.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         		panelPrincipal.removeAll();
@@ -828,6 +925,10 @@ public class CarRenta extends JFrame {
         panelPrincipal.add(btnNewButton_8);
         
         btnNewButton_9 = new JButton("Agregar");
+        btnNewButton_9.setForeground(Color.WHITE);
+        btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD, 20));
+        btnNewButton_9.setFocusable(false);
+        btnNewButton_9.setBackground(Color.black);
         btnNewButton_9.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -892,6 +993,196 @@ public class CarRenta extends JFrame {
         });
         btnNewButton_9.setBounds(597, 581, 172, 49);
         panelPrincipal.add(btnNewButton_9);
+	}
+	
+	public void editarCarro(Carro carro) {
+		panelPrincipal.removeAll();
+		repaint();
+	    panelPrincipal.setLayout(null);
+	    
+	    lblNewLabel_19 = new JLabel("KING");
+		lblNewLabel_19.setForeground(new Color(155, 43, 33));
+		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_19.setBounds(107, 19, 71, 33);
+		panelPrincipal.add(lblNewLabel_19);
+		
+		JLabel lblNewLabel_6 = new JLabel("      FAST");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_6.setBackground(new Color(0, 0, 0));
+		lblNewLabel_6.setForeground(new Color(255, 255, 255));
+		lblNewLabel_6.setBounds(0, 0, 1174, 70);
+		lblNewLabel_6.setOpaque(true);
+		panelPrincipal.add(lblNewLabel_6);
+
+	    JLabel lblTitulo = new JLabel("Editar Carro");
+	    lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
+	    lblTitulo.setBounds(459, 81, 200, 40);
+	    panelPrincipal.add(lblTitulo);
+
+	    JLabel lblMarca = new JLabel("Marca:");
+	    lblMarca.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblMarca.setBounds(104, 153, 150, 30);
+	    panelPrincipal.add(lblMarca);
+
+	    JComboBox<String> comboMarca = new JComboBox<>(new String[] {
+	        "Toyota", "Honda", "Ford", "Chevrolet", "Nissan",
+	        "Volkswagen", "BMW", "Mercedes-Benz", "Audi", "Hyundai",
+	        "Kia", "Mazda", "Subaru", "Lexus", "Jaguar",
+	        "Land Rover", "Porsche", "Ferrari", "Lamborghini", "Tesla",
+	        "Mitsubishi", "Volvo", "Acura", "Infiniti", "Chrysler"
+	    });
+	    comboMarca.setSelectedItem(carro.getMarca());
+	    comboMarca.setBounds(254, 153, 200, 30);
+	    panelPrincipal.add(comboMarca);
+
+	    JLabel lblModelo = new JLabel("Modelo:");
+	    lblModelo.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblModelo.setBounds(104, 203, 150, 30);
+	    panelPrincipal.add(lblModelo);
+
+	    JTextField txtModelo = new JTextField(carro.getModelo());
+	    txtModelo.setBounds(254, 203, 200, 30);
+	    panelPrincipal.add(txtModelo);
+
+	    JLabel lblTransmision = new JLabel("Transmisión:");
+	    lblTransmision.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblTransmision.setBounds(104, 253, 150, 30);
+	    panelPrincipal.add(lblTransmision);
+
+	    JComboBox<String> comboTransmision = new JComboBox<>(new String[] {"Manual", "Automática"});
+	    comboTransmision.setSelectedItem(carro.getTransmision());
+	    comboTransmision.setBounds(254, 253, 200, 30);
+	    panelPrincipal.add(comboTransmision);
+
+	    JLabel lblPuertas = new JLabel("N. Puertas:");
+	    lblPuertas.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblPuertas.setBounds(104, 303, 150, 30);
+	    panelPrincipal.add(lblPuertas);
+
+	    JComboBox<Integer> comboPuertas = new JComboBox<>(new Integer[] {2, 4});
+	    comboPuertas.setSelectedItem(carro.getPuertas());
+	    comboPuertas.setBounds(254, 303, 200, 30);
+	    panelPrincipal.add(comboPuertas);
+
+	    JLabel lblEquipaje = new JLabel("Capacidad de equipaje:");
+	    lblEquipaje.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblEquipaje.setBounds(104, 353, 200, 30);
+	    panelPrincipal.add(lblEquipaje);
+
+	    JComboBox<Integer> comboEquipaje = new JComboBox<>(new Integer[] {1, 2});
+	    comboEquipaje.setSelectedItem(carro.getEquipaje());
+	    comboEquipaje.setBounds(304, 353, 150, 30);
+	    panelPrincipal.add(comboEquipaje);
+
+	    JLabel lblPrecio = new JLabel("Precio por día MXN:");
+	    lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    lblPrecio.setBounds(104, 403, 200, 30);
+	    panelPrincipal.add(lblPrecio);
+
+	    JTextField txtPrecio = new JTextField(String.valueOf(carro.getPrecio()));
+	    txtPrecio.setBounds(304, 403, 150, 30);
+	    panelPrincipal.add(txtPrecio);
+
+	    JTextField txtImagen = new JTextField(carro.getImagen());
+	    txtImagen.setBounds(114, 452, 165, 30);
+	    panelPrincipal.add(txtImagen);
+
+	    JButton btnSeleccionarImagen = new JButton("Seleccionar Imagen");
+	    btnSeleccionarImagen.setBounds(304, 452, 150, 30);
+	    btnSeleccionarImagen.addActionListener(e -> {
+	        JFileChooser fileChooser = new JFileChooser();
+	        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "jpeg", "png"));
+	        int resultado = fileChooser.showOpenDialog(null);
+	        if (resultado == JFileChooser.APPROVE_OPTION) {
+	            File imagenSeleccionada = fileChooser.getSelectedFile();
+	            txtImagen.setText(imagenSeleccionada.getAbsolutePath());
+	        }
+	    });
+	    panelPrincipal.add(btnSeleccionarImagen);
+
+	    JButton btnGuardarCambios = new JButton("Guardar Cambios");
+	    btnGuardarCambios.setForeground(Color.WHITE);
+	    btnGuardarCambios.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    btnGuardarCambios.setFocusable(false);
+	    btnGuardarCambios.setBackground(Color.black);
+	    btnGuardarCambios.setBounds(570, 591, 180, 40);
+	    btnGuardarCambios.addActionListener(e -> {
+	        // Actualizar el objeto Carro con los valores editados
+	        carro.setMarca((String) comboMarca.getSelectedItem());
+	        carro.setModelo(txtModelo.getText());
+	        carro.setTransmision((String) comboTransmision.getSelectedItem());
+	        carro.setPuertas((int) comboPuertas.getSelectedItem());
+	        carro.setEquipaje((int) comboEquipaje.getSelectedItem());
+	        carro.setPrecio(Double.parseDouble(txtPrecio.getText()));
+	        carro.setImagen(txtImagen.getText());
+
+	        JOptionPane.showMessageDialog(null, "Cambios guardados correctamente.");
+	        
+	        panelPrincipal.removeAll();
+			
+	        deportivosCompactosPanel();
+            repaint();
+	        // Después de guardar, puedes regresar al panel anterior o a otro panel.
+	    });
+
+	    panelPrincipal.add(btnGuardarCambios);
+
+	    // Botón para regresar sin guardar
+	    JButton btnRegresar = new JButton("Regresar");
+	    btnRegresar.setForeground(Color.WHITE);
+	    btnRegresar.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnRegresar.setFocusable(false);
+	    btnRegresar.setBackground(new Color(155, 43, 33));
+	    btnRegresar.setBounds(369, 589, 180, 40);
+	    btnRegresar.addActionListener(e -> {
+	    	panelPrincipal.removeAll();
+	        deportivosCompactosPanel();
+            repaint();
+	    });
+	    panelPrincipal.add(btnRegresar);
+	    
+	    JPanel panel = new JPanel();
+	    panel.setBounds(540, 153, 566, 287);
+	    panelPrincipal.add(panel);
+	    panel.setLayout(new GridLayout(0, 2, 0, 0));
+	    
+	    JLabel lblNewLabel_30 = new JLabel("         ");
+	    lblNewLabel_30.setIcon(new ImageIcon(carro.getImagen()));
+	    panel.add(lblNewLabel_30);
+	    
+	    JLabel lblNewLabel_31 = new JLabel();
+	    lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 27));
+	    lblNewLabel_31.setText("<html>" + carro.getMarca() + " " + carro.getModelo() + "<br>"
+                + carro.getPuertas() + " Pasajeros<br>"
+                + "Aire Acondicionado<br>"
+                + carro.getTransmision() + "<br>"
+                + carro.getPuertas() + " Puertas<br>"
+                + carro.getEquipaje() + " Equipaje<br>"
+                + "$" + carro.getPrecio() + "/Día</html>");
+	    panel.add(lblNewLabel_31);
+	    
+	    JButton btnEliminar = new JButton("Eliminar");
+	    btnEliminar.setForeground(Color.WHITE);
+	    btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
+	    btnEliminar.setFocusable(false);
+	    btnEliminar.setBackground(Color.BLACK);
+	    btnEliminar.setBounds(768, 445, 180, 40);
+	    btnEliminar.addActionListener(e -> {
+	        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar este carro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+	        
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            deportivosCompactos.remove(carro);
+	            
+	            JOptionPane.showMessageDialog(null, "Carro eliminado correctamente.");
+	            panelPrincipal.removeAll();
+	            deportivosCompactosPanel();
+                repaint();
+	        }
+	    });
+	    panelPrincipal.add(btnEliminar);
+	    panelPrincipal.revalidate();
+	    panelPrincipal.repaint();
 	}
 }
 
