@@ -1,12 +1,11 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import java.security.SecureRandom;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +15,8 @@ import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
@@ -27,12 +28,18 @@ import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.ComboBoxModel;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import javax.swing.SwingConstants;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class CarRenta extends JFrame {
 	private JScrollBar scrollBar = new JScrollBar();
@@ -88,12 +95,24 @@ public class CarRenta extends JFrame {
 	private JButton btnNewButton_8;
 	private JLabel lblNewLabel_32;
 	private JLabel lblNewLabel_33;
-	private JLabel lblNewLabel_35;
 	private JLabel lblNewLabel_36; 
     private JTextField fechaInicialField;
     private JTextField fechaFinalField;
     private JPanel panel_2;
     private JLabel lblNewLabel_37;
+    private JTextField textField_4;
+    private JButton btnNewButton_13;
+    private JLabel lblNewLabel_40;
+    private JLabel lblNewLabel_41;
+    private JLabel lblNewLabel_42;
+    private JLabel lblNewLabel_43;
+    private JLabel lblNewLabel_39;
+    private JLabel lblNewLabel_44;
+    private JLabel lblNewLabel_45;
+    private JLabel lblNewLabel_46;
+    private JLabel lblNewLabel_47;
+    private JLabel lblNewLabel_48;
+    private JLabel lblNewLabel_49;
 	/**
 	 * Launch the application.
 	 */
@@ -136,112 +155,23 @@ public class CarRenta extends JFrame {
 		
 	}
 	public CarRenta() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 720);
-		setLocationRelativeTo(null);
-		setResizable(false);
-		iniciarCarros();
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setBounds(100, 100, 1200, 720);
+	    setLocationRelativeTo(null);
+	    setResizable(false);
+	    iniciarCarros();
+	    contentPane = new JPanel();
+	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		panelPrincipal = new JPanel();
-		panelPrincipal.setBackground(Color.white);
-		contentPane.add(panelPrincipal);
-		panelPrincipal.setLayout(null);
-		
+	    setContentPane(contentPane);
+	    contentPane.setLayout(new BorderLayout(0, 0));
 
-		panelPrincipal.setBackground(new Color(89, 89, 89));
-		lblNewLabel_19 = new JLabel("KING");
-		lblNewLabel_19.setForeground(new Color(155, 43, 33));
-		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_19.setBounds(107, 19, 71, 33);
-		panelPrincipal.add(lblNewLabel_19);
-		
-		JLabel lblNewLabel_6 = new JLabel("      FAST");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_6.setBackground(new Color(0, 0, 0));
-		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(0, 0, 1174, 70);
-		lblNewLabel_6.setOpaque(true);
-		panelPrincipal.add(lblNewLabel_6);
-		
-		lblNewLabel_32 = new JLabel("New label");
-		lblNewLabel_32.setBorder(new LineBorder(Color.black, 5));
-		lblNewLabel_32.setIcon(new ImageIcon("C:\\Users\\Oscar\\Downloads\\CarRenta-main\\ExamenUnidad3\\src\\dodgechallenger.jpg"));
-		lblNewLabel_32.setBounds(60, 166, 267, 193);
-		panelPrincipal.add(lblNewLabel_32);
-		
-		lblNewLabel_33 = new JLabel("   Uswer");
-		lblNewLabel_33.setBorder(new LineBorder(Color.black, 1));
-		lblNewLabel_33.setForeground(new Color(255, 255, 255));
-		lblNewLabel_33.setBackground(new Color(31, 32, 38 ));
-		lblNewLabel_33.setOpaque(true);
-		lblNewLabel_33.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_33.setBounds(362, 166, 283, 53);
-		panelPrincipal.add(lblNewLabel_33);
-		
-		lblNewLabel_35 = new JLabel("   Fecha inicial");
-		lblNewLabel_35.setOpaque(true);
-		lblNewLabel_35.setForeground(Color.WHITE);
-		lblNewLabel_35.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_35.setBorder(new LineBorder(Color.black, 1));
-		lblNewLabel_35.setBackground(new Color(31, 32, 38));
-		lblNewLabel_35.setBounds(362, 310, 283, 49);
-		panelPrincipal.add(lblNewLabel_35);
-
-		lblNewLabel_36 = new JLabel("<html>Incluido en la reservación<br>Cobertura contra daños al vehículo<br>Protección Contra Terceros<br>Cobertura contra robo<br>El mejor precio garantizado<br>Kilometraje libre<br>Tarifas de la compañía de renta<br>Sin tarifas por cambios</html>");
-		lblNewLabel_36.setForeground(new Color(255, 255, 255));
-		lblNewLabel_36.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_36.setBounds(60, 364, 267, 181);
-		panelPrincipal.add(lblNewLabel_36);
-		
-		panel_2 = new JPanel();
-		panel_2.setBounds(474, 236, 171, 38);
-		panelPrincipal.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
-		
-		JComboBox comboBox_4 = new JComboBox();
-		panel_2.add(comboBox_4);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		panel_2.add(comboBox_5);
-		
-		JComboBox comboBox = new JComboBox();
-		panel_2.add(comboBox);
-		
-		lblNewLabel_37 = new JLabel("   Fecha inicial");
-		lblNewLabel_37.setOpaque(true);
-		lblNewLabel_37.setForeground(Color.WHITE);
-		lblNewLabel_37.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_37.setBorder(new LineBorder(Color.black, 1));
-		lblNewLabel_37.setBackground(new Color(31, 32, 38));
-		lblNewLabel_37.setBounds(362, 236, 283, 49);
-		panelPrincipal.add(lblNewLabel_37);
-		
+	    panelPrincipal = new JPanel();
+	    panelPrincipal.setBackground(Color.white);
+	    contentPane.add(panelPrincipal);
+	    panelPrincipal.setLayout(null);
+		inicio();
 	}
-	
-	public void scrollPanel() {
-		scrollBar = new JScrollBar(JScrollBar.VERTICAL);
-        scrollBar.setBounds(1157, 70, 17, 700);
-        scrollBar.setMinimum(0);
-        scrollBar.setMaximum(100);
-        scrollBar.setValue(0);
-        scrollBar.setVisibleAmount(10); 
-
-        scrollBar.addAdjustmentListener(new AdjustmentListener() {
-            @Override
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                int valorDesplazamiento = scrollBar.getValue();
-                panelPrincipal.setLocation(panelPrincipal.getLocation().x, -valorDesplazamiento);
-            }
-        });
-	
-     panelPrincipal.add(scrollBar);
-	}
-	
 	public void inicio() {
 
 		panelPrincipal.setBackground(Color.black);
@@ -379,8 +309,7 @@ public class CarRenta extends JFrame {
 	}
 	
 	public void menu() {
-		
-
+	    panelPrincipal.setBackground(Color.white);
 		lblNewLabel_17 = new JLabel("");
 		lblNewLabel_17.setIcon(new ImageIcon(getClass().getResource("iconoUser.png")));
 		lblNewLabel_17.setForeground(new Color(255, 255, 255));
@@ -467,7 +396,7 @@ public class CarRenta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	panelPrincipal.removeAll();
-            	deportivosCompactosPanel();
+            	carrosPanel(deportivosCompactos);
                 repaint();
             }
         });
@@ -483,7 +412,7 @@ public class CarRenta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	panelPrincipal.removeAll();
-            	muscleCarPanel();
+            	carrosPanel(muscleCars);
                 repaint();
             }
         });
@@ -495,6 +424,14 @@ public class CarRenta extends JFrame {
 		btnNewButton_4.setBackground(Color.black);
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton_4.setBounds(878, 446, 122, 56);
+		btnNewButton_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	panelPrincipal.removeAll();
+            	carrosPanel(deportivos);
+                repaint();
+            }
+        });
 		panelPrincipal.add(btnNewButton_4);
 		
 		btnNewButton_5 = new JButton("Volver y salir");
@@ -507,8 +444,7 @@ public class CarRenta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	panelPrincipal.removeAll();
-				
-                login();
+            	carrosPanel(deportivos);
                 repaint();
             }
         });
@@ -516,8 +452,9 @@ public class CarRenta extends JFrame {
 		
 	}
 	
-	public void deportivosCompactosPanel() {
-		
+	public void carrosPanel(List<Carro> carros) {
+		List<Carro> carrosPanel=carros;
+	    panelPrincipal.setBackground(Color.white);
 		lblNewLabel_19 = new JLabel("KING");
 		lblNewLabel_19.setForeground(new Color(155, 43, 33));
 		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -565,8 +502,8 @@ public class CarRenta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	panelPrincipal.removeAll();
-				
-            	agregarCarro();
+				Carro carro = null;
+            	agregarCarro(carrosPanel, carro);
                 repaint();
             }
         });
@@ -583,27 +520,22 @@ public class CarRenta extends JFrame {
 		lblNewLabel_22.setBounds(547, 81, 135, 52);
 		panelPrincipal.add(lblNewLabel_22);
 		
-		JPanel[] panelA=new JPanel[deportivosCompactos.size()];
-		JPanel[] panelbtn=new JPanel[deportivosCompactos.size()];
-		JLabel[] blanco1=new JLabel[deportivosCompactos.size()];
-		JLabel[] blanco2=new JLabel[deportivosCompactos.size()];
+		JPanel[] panelA=new JPanel[carrosPanel.size()];
+		JPanel[] panelbtn=new JPanel[carrosPanel.size()];
+		JLabel[] blanco1=new JLabel[carrosPanel.size()];
+		JLabel[] blanco2=new JLabel[carrosPanel.size()];
 		
-		for (int i = 0; i < deportivosCompactos.size(); i++) {
-            Carro carro = deportivosCompactos.get(i);
+		for (int i = 0; i < carrosPanel.size(); i++) {
+            Carro carro = carrosPanel.get(i);
 
             panelA[i] = new JPanel();
             panelA[i].setLayout(new GridLayout(0, 3, 0, 0));
             panelA[i].setBackground(Color.white);
-            // Crear JLabel para la imagen del coche
             try {
                 JLabel lblImagenCarro = new JLabel();
-                //lblImagenCarro.setIcon(new ImageIcon(getClass().getResource(carro.getImagen())));
                 lblImagenCarro.setIcon(new ImageIcon(carro.getImagen()));
                 panelA[i].add(lblImagenCarro);
             }catch(Exception e) {}
-            
-
-            // Crear JLabel para la información del coche
             JLabel lblInfoCarro = new JLabel();
             lblInfoCarro.setText("<html>" + carro.getMarca() + " " + carro.getModelo() + "<br>"
                 + carro.getPuertas() + " Pasajeros<br>"
@@ -631,7 +563,8 @@ public class CarRenta extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                 	panelPrincipal.removeAll();
         	        editarCarro(carro);
-                    repaint();
+        	        panelPrincipal.revalidate();
+        	        panelPrincipal.repaint();
                 }
             });
             panelbtn[i].add(editar);
@@ -644,8 +577,7 @@ public class CarRenta extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                 	panelPrincipal.removeAll();
-    				
-                    menu();
+        	        reservarCarro(carro);
                     repaint();
                 }
             }); 
@@ -659,138 +591,14 @@ public class CarRenta extends JFrame {
 		contentPane.add(panelPrincipal);
         revalidate();
         repaint();
-	}
+	}	
 	
-	public void muscleCarPanel() {
-		lblNewLabel_19 = new JLabel("KING");
-		lblNewLabel_19.setForeground(new Color(155, 43, 33));
-		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_19.setBounds(107, 19, 71, 33);
-		panelPrincipal.add(lblNewLabel_19);
+	public void agregarCarro(List<Carro> carros, Carro car) {
+	    panelPrincipal.setBackground(Color.white);
+		panelPrincipal.removeAll();
+		panelPrincipal.revalidate();
+		panelPrincipal.repaint();
 		
-		JLabel lblNewLabel_6 = new JLabel("      FAST");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_6.setBackground(new Color(0, 0, 0));
-		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(0, 0, 1174, 70);
-		lblNewLabel_6.setOpaque(true);
-		panelPrincipal.add(lblNewLabel_6);
-		
-		btnNewButton_6 = new JButton("Volver");
-		btnNewButton_6.setForeground(Color.WHITE);
-		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_6.setFocusable(false);
-		btnNewButton_6.setBackground(new Color(155, 43, 33));
-		btnNewButton_6.setBounds(41, 81, 118, 52);
-		btnNewButton_6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	panelPrincipal.removeAll();
-				
-                menu();
-                repaint();
-            }
-        });
-		panelPrincipal.add(btnNewButton_6);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(41, 154, 1056, 506);
-		panelPrincipal.add(panel);
-		panel.setLayout(new GridLayout(0,2, 0, 0));
-		
-		JButton btnNewButton_6_1 = new JButton("Nuevo carro");
-		btnNewButton_6_1.setForeground(Color.WHITE);
-		btnNewButton_6_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_6_1.setFocusable(false);
-		btnNewButton_6_1.setBackground(Color.black);
-		btnNewButton_6_1.setBounds(915, 81, 182, 52);
-		panelPrincipal.add(btnNewButton_6_1);
-		
-		lblNewLabel_17 = new JLabel("");
-		lblNewLabel_17.setIcon(new ImageIcon(getClass().getResource("iconoUser.png")));
-		lblNewLabel_17.setForeground(new Color(255, 255, 255));
-		lblNewLabel_17.setBounds(499, 81, 49, 52);
-		panelPrincipal.add(lblNewLabel_17);
-		
-		JLabel lblNewLabel_22 = new JLabel(usuario);
-		lblNewLabel_22.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel_22.setBounds(547, 81, 135, 52);
-		panelPrincipal.add(lblNewLabel_22);
-		
-		JPanel[] panelA=new JPanel[muscleCars.size()];
-		JPanel[] panelbtn=new JPanel[muscleCars.size()];
-		JLabel[] blanco1=new JLabel[muscleCars.size()];
-		JLabel[] blanco2=new JLabel[muscleCars.size()];
-		
-		for (int i = 0; i < muscleCars.size(); i++) {
-            Carro carro = muscleCars.get(i);
-
-            panelA[i] = new JPanel();
-            panelA[i].setLayout(new GridLayout(0, 3, 0, 0));
-            // Crear JLabel para la imagen del coche
-            JLabel lblImagenCarro = new JLabel();
-            lblImagenCarro.setIcon(new ImageIcon(getClass().getResource(carro.getImagen())));
-            panelA[i].add(lblImagenCarro);
-
-            // Crear JLabel para la información del coche
-            JLabel lblInfoCarro = new JLabel();
-            lblInfoCarro.setText("<html>" + carro.getMarca() + " " + carro.getModelo() + "<br>"
-                + carro.getPuertas() + " Pasajeros<br>"
-                + "Aire Acondicionado<br>"
-                + carro.getTransmision() + "<br>"
-                + carro.getPuertas() + " Puertas<br>"
-                + carro.getEquipaje() + " Equipaje<br>"
-                + "$" + carro.getPrecio() + "/Día</html>");
-            panelA[i].add(lblInfoCarro);
-            
-            panelbtn[i] = new JPanel();
-            panelbtn[i].setLayout(new GridLayout(4, 0, 0, 0));
-            
-            blanco1[i]=new JLabel("            ");
-            panelbtn[i].add(blanco1[i]);
-            
-            JButton editar=new JButton("Editar");
-            editar.setForeground(Color.WHITE);
-            editar.setFont(new Font("Tahoma", Font.BOLD, 20));
-            editar.setFocusable(false);
-            editar.setBackground(new Color(155, 43, 33));
-            editar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                	panelPrincipal.removeAll();
-    				
-                    menu();
-                    repaint();
-                }
-            });
-            panelbtn[i].add(editar);
-            JButton reservar=new JButton("Reservar");
-            reservar.setForeground(Color.WHITE);
-            reservar.setFont(new Font("Tahoma", Font.BOLD, 20));
-            reservar.setFocusable(false);
-            reservar.setBackground(Color.black);
-            reservar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                	panelPrincipal.removeAll();
-    				
-                    menu();
-                    repaint();
-                }
-            }); 
-            panelbtn[i].add(reservar);
-            blanco2[i]=new JLabel("            ");
-            panelbtn[i].add(blanco2[i]);
-            
-            panelA[i].add(panelbtn[i]);
-            panel.add(panelA[i]);
-        }
-		contentPane.add(panelPrincipal);
-        revalidate();
-        repaint();
-	}
-	
-	public void agregarCarro() {
 		lblNewLabel_19 = new JLabel("KING");
 		lblNewLabel_19.setForeground(new Color(155, 43, 33));
 		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -917,7 +725,7 @@ public class CarRenta extends JFrame {
         btnNewButton_8.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         		panelPrincipal.removeAll();
-        		deportivosCompactosPanel();
+        		carrosPanel(carros);
                 repaint();
         	}
         });
@@ -987,7 +795,7 @@ public class CarRenta extends JFrame {
         	        deportivosCompactos.add(nuevoCarro);
         	            JOptionPane.showMessageDialog(null, "Vehículo agregado exitosamente.");
         	            panelPrincipal.removeAll();
-                		deportivosCompactosPanel();
+                		carrosPanel(carros);
                         repaint();
         	        }
         });
@@ -996,9 +804,10 @@ public class CarRenta extends JFrame {
 	}
 	
 	public void editarCarro(Carro carro) {
+
 		panelPrincipal.removeAll();
-		repaint();
-	    panelPrincipal.setLayout(null);
+		panelPrincipal.revalidate();
+		panelPrincipal.repaint();
 	    
 	    lblNewLabel_19 = new JLabel("KING");
 		lblNewLabel_19.setForeground(new Color(155, 43, 33));
@@ -1108,7 +917,6 @@ public class CarRenta extends JFrame {
 	    btnGuardarCambios.setBackground(Color.black);
 	    btnGuardarCambios.setBounds(570, 591, 180, 40);
 	    btnGuardarCambios.addActionListener(e -> {
-	        // Actualizar el objeto Carro con los valores editados
 	        carro.setMarca((String) comboMarca.getSelectedItem());
 	        carro.setModelo(txtModelo.getText());
 	        carro.setTransmision((String) comboTransmision.getSelectedItem());
@@ -1120,15 +928,12 @@ public class CarRenta extends JFrame {
 	        JOptionPane.showMessageDialog(null, "Cambios guardados correctamente.");
 	        
 	        panelPrincipal.removeAll();
-			
-	        deportivosCompactosPanel();
+			menu();
             repaint();
-	        // Después de guardar, puedes regresar al panel anterior o a otro panel.
 	    });
 
 	    panelPrincipal.add(btnGuardarCambios);
 
-	    // Botón para regresar sin guardar
 	    JButton btnRegresar = new JButton("Regresar");
 	    btnRegresar.setForeground(Color.WHITE);
 	    btnRegresar.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -1137,7 +942,7 @@ public class CarRenta extends JFrame {
 	    btnRegresar.setBounds(369, 589, 180, 40);
 	    btnRegresar.addActionListener(e -> {
 	    	panelPrincipal.removeAll();
-	        deportivosCompactosPanel();
+	        menu();
             repaint();
 	    });
 	    panelPrincipal.add(btnRegresar);
@@ -1148,6 +953,8 @@ public class CarRenta extends JFrame {
 	    panel.setLayout(new GridLayout(0, 2, 0, 0));
 	    
 	    JLabel lblNewLabel_30 = new JLabel("         ");
+	    lblNewLabel_30.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_30.setVerticalAlignment(SwingConstants.CENTER);
 	    lblNewLabel_30.setIcon(new ImageIcon(carro.getImagen()));
 	    panel.add(lblNewLabel_30);
 	    
@@ -1176,13 +983,365 @@ public class CarRenta extends JFrame {
 	            
 	            JOptionPane.showMessageDialog(null, "Carro eliminado correctamente.");
 	            panelPrincipal.removeAll();
-	            deportivosCompactosPanel();
+	            menu();
                 repaint();
 	        }
 	    });
 	    panelPrincipal.add(btnEliminar);
 	    panelPrincipal.revalidate();
 	    panelPrincipal.repaint();
+	}
+	
+	public void reservarCarro(Carro carro) {
+		panelPrincipal.revalidate();
+		panelPrincipal.repaint();
+		String ticketID=generarTicketAleatorio();
+		panelPrincipal.setBackground(new Color(89, 89, 89));
+	    lblNewLabel_19 = new JLabel("KING");
+	    lblNewLabel_19.setForeground(new Color(155, 43, 33));
+	    lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 25));
+	    lblNewLabel_19.setBounds(107, 19, 71, 33);
+	    panelPrincipal.add(lblNewLabel_19);
+
+	    JLabel lblNewLabel_6 = new JLabel("      FAST");
+	    lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 25));
+	    lblNewLabel_6.setBackground(new Color(0, 0, 0));
+	    lblNewLabel_6.setForeground(new Color(255, 255, 255));
+	    lblNewLabel_6.setBounds(0, 0, 1174, 70);
+	    lblNewLabel_6.setOpaque(true);
+	    panelPrincipal.add(lblNewLabel_6);
+
+	    lblNewLabel_32 = new JLabel();
+	    lblNewLabel_32.setBorder(new LineBorder(Color.black, 5));
+	    lblNewLabel_32.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_32.setVerticalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_32.setIcon(new ImageIcon(carro.getImagen()));
+	    lblNewLabel_32.setBounds(76, 156, 267, 213);
+	    panelPrincipal.add(lblNewLabel_32);
+
+	    lblNewLabel_33 = new JLabel(usuario);
+	    lblNewLabel_33.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_33.setBorder(new LineBorder(Color.black, 1));
+	    lblNewLabel_33.setForeground(new Color(255, 255, 255));
+	    lblNewLabel_33.setBackground(new Color(31, 32, 38));
+	    lblNewLabel_33.setOpaque(true);
+	    lblNewLabel_33.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    lblNewLabel_33.setBounds(400, 166, 309, 53);
+	    panelPrincipal.add(lblNewLabel_33);
+
+	    lblNewLabel_36 = new JLabel("<html>Incluido en la reservación<br>Cobertura contra daños al vehículo<br>Protección Contra Terceros<br>Cobertura contra robo<br>El mejor precio garantizado<br>Kilometraje libre<br>Tarifas de la compañía de renta<br>Sin tarifas por cambios</html>");
+	    lblNewLabel_36.setForeground(new Color(255, 255, 255));
+	    lblNewLabel_36.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_36.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    lblNewLabel_36.setBounds(76, 380, 261, 166);
+	    panelPrincipal.add(lblNewLabel_36);
+
+	    panel_2 = new JPanel();
+	    panel_2.setBounds(514, 240, 183, 38);
+	    panelPrincipal.add(panel_2);
+	    panel_2.setLayout(new GridLayout(0, 3, 0, 0));
+
+	    JComboBox<Integer> comboBox_4 = new JComboBox<>();
+	    JComboBox<String> comboBox_5 = new JComboBox<>();
+	    JComboBox<Integer> comboBox = new JComboBox<>();
+	    
+
+	    JComboBox<Integer> comboBox_6 = new JComboBox<>();
+	    JComboBox<String> comboBox_7 = new JComboBox<>();
+	    JComboBox<Integer> comboBox8 = new JComboBox<>();
+	    
+	    for (int i = 1; i <= 31; i++) {
+	        comboBox_4.addItem(i); 
+	        comboBox_6.addItem(i);
+	    }
+	    String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+	    for (String mes : meses) {
+	        comboBox_5.addItem(mes); 
+	        comboBox_7.addItem(mes);
+	    }
+	    for (int i = 2024; i <= 2030; i++) {
+	        comboBox.addItem(i); 
+	        comboBox8.addItem(i);
+	    }
+	    
+	    panel_2.add(comboBox_4);
+	    panel_2.add(comboBox_5);
+	    panel_2.add(comboBox);
+	    
+	    lblNewLabel_37 = new JLabel("   Fecha inicial:");
+	    lblNewLabel_37.setOpaque(true);
+	    lblNewLabel_37.setForeground(Color.WHITE);
+	    lblNewLabel_37.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_37.setBorder(new LineBorder(Color.black, 1));
+	    lblNewLabel_37.setBackground(new Color(31, 32, 38));
+	    lblNewLabel_37.setBounds(400, 231, 309, 59);
+	    panelPrincipal.add(lblNewLabel_37);
+	    
+	    JPanel panel_2_1 = new JPanel();
+	    panel_2_1.setBounds(514, 310, 183, 38);
+	    
+	    panel_2_1.setLayout(new GridLayout(0, 3, 0, 0));
+	    
+	    panel_2_1.add(comboBox_6);
+	    panel_2_1.add(comboBox_7);
+	    panel_2_1.add(comboBox8);
+	    panelPrincipal.add(panel_2_1);
+	    JLabel lblNewLabel_37_1 = new JLabel("   Fecha Final:");
+	    lblNewLabel_37_1.setOpaque(true);
+	    lblNewLabel_37_1.setForeground(Color.WHITE);
+	    lblNewLabel_37_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_37_1.setBorder(new LineBorder(Color.black, 1));
+	    lblNewLabel_37_1.setBackground(new Color(31, 32, 38));
+	    lblNewLabel_37_1.setBounds(400, 301, 309, 59);
+	    panelPrincipal.add(lblNewLabel_37_1);
+	    
+	    JComboBox<String> comboBox_8 = new JComboBox<>();
+	    comboBox_8.setBounds(906, 179, 155, 28);
+	    comboBox_8.addItem("Visa");
+	    comboBox_8.addItem("Cheque");
+	    comboBox_8.addItem("Efectivo");
+	    comboBox_8.setBounds(906, 179, 155, 28);
+	    panelPrincipal.add(comboBox_8);
+	    
+	    JLabel lblNewLabel_37_2 = new JLabel("   Metodo de pago:");
+	    lblNewLabel_37_2.setHorizontalAlignment(SwingConstants.LEFT);
+	    lblNewLabel_37_2.setOpaque(true);
+	    lblNewLabel_37_2.setForeground(Color.WHITE);
+	    lblNewLabel_37_2.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_37_2.setBorder(new LineBorder(Color.black, 1));
+	    lblNewLabel_37_2.setBackground(new Color(31, 32, 38));
+	    lblNewLabel_37_2.setBounds(764, 166, 309, 53);
+	    panelPrincipal.add(lblNewLabel_37_2);
+	    
+	    textField_4 = new JTextField();
+	    textField_4.setText(ticketID);
+	    textField_4.setEditable(false);
+	    textField_4.setBounds(906, 248, 155, 28);
+	    panelPrincipal.add(textField_4);
+	    textField_4.setColumns(10);
+	    
+	    JLabel lblNewLabel_37_2_1 = new JLabel("           ID ticket:");
+	    lblNewLabel_37_2_1.setOpaque(true);
+	    lblNewLabel_37_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+	    lblNewLabel_37_2_1.setForeground(Color.WHITE);
+	    lblNewLabel_37_2_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_37_2_1.setBorder(new LineBorder(Color.black, 1));
+	    lblNewLabel_37_2_1.setBackground(new Color(31, 32, 38));
+	    lblNewLabel_37_2_1.setBounds(764, 231, 309, 59);
+	    panelPrincipal.add(lblNewLabel_37_2_1);
+	    
+	    JButton btnNewButton_11 = new JButton("Volver");
+	    btnNewButton_11.setForeground(Color.WHITE);
+	    btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnNewButton_11.setFocusable(false);
+	    btnNewButton_11.setBackground(new Color(155, 43, 33));
+	    btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnNewButton_11.setBounds(76, 81, 102, 53);
+	    btnNewButton_11.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        		panelPrincipal.removeAll();
+	        		menu();
+	                repaint();
+	        	}
+	        });
+	    panelPrincipal.add(btnNewButton_11);
+	    
+	    JLabel lblNewLabel_34 = new JLabel("Reservar: "+carro.getMarca()+" "+carro.getModelo());
+	    lblNewLabel_34.setForeground(new Color(255, 255, 255));
+	    lblNewLabel_34.setFont(new Font("Tahoma", Font.BOLD, 30));
+	    lblNewLabel_34.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_34.setBounds(359, 81, 410, 53);
+	    panelPrincipal.add(lblNewLabel_34);
+	    
+	    JLabel lblNewLabel_35_1_1_2 = new JLabel();
+	    lblNewLabel_35_1_1_2.setText("Total de dias: ");
+	    lblNewLabel_35_1_1_2.setHorizontalAlignment(SwingConstants.LEFT);
+	    lblNewLabel_35_1_1_2.setForeground(Color.WHITE);
+	    lblNewLabel_35_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    lblNewLabel_35_1_1_2.setBounds(400, 473, 309, 38);
+	    panelPrincipal.add(lblNewLabel_35_1_1_2);
+
+	    JLabel lblNewLabel_35_1_1_2_1 = new JLabel();
+	    JButton btnNewButton_12_1 = new JButton("Pagar");
+	    btnNewButton_12_1.setForeground(Color.WHITE);
+	    btnNewButton_12_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnNewButton_12_1.setFocusable(false);
+	    btnNewButton_12_1.setBackground(new Color(155, 43, 33));
+	    btnNewButton_12_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnNewButton_12_1.setBounds(764, 438, 309, 53);
+	    btnNewButton_12_1.setEnabled(false);
+	    lblNewLabel_40 = new JLabel();
+	    btnNewButton_12_1.addActionListener(e -> {
+    	 	JDialog ticketDialog = new JDialog(this, "Ticket de Reserva", true);
+    	    ticketDialog.setSize(300, 500);
+    	    ticketDialog.setLayout(null);
+	    	    
+		    lblNewLabel_40.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_40.setHorizontalAlignment(SwingConstants.RIGHT);
+		    lblNewLabel_40.setBounds(120, 11, 145, 25);
+		    ticketDialog.add(lblNewLabel_40);
+		    JLabel lblNewLabel_50 = new JLabel(ticketID);
+		    lblNewLabel_50.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_50.setHorizontalAlignment(SwingConstants.LEFT);
+		    lblNewLabel_50.setBounds(0, 11, 145, 25);
+		    ticketDialog.add(lblNewLabel_50);
+		    lblNewLabel_41 = new JLabel(usuario);
+		    lblNewLabel_41.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		    lblNewLabel_41.setBounds(25, 72, 123, 25);
+		    ticketDialog.add(lblNewLabel_41);
+		    
+		    lblNewLabel_39 = new JLabel("Tu reserva "+carro.getMarca()+" "+carro.getModelo());
+		    lblNewLabel_39.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_39.setBounds(25, 108, 255, 25);
+		    ticketDialog.add(lblNewLabel_39);
+		    
+		    lblNewLabel_44 = new JLabel("Valor del vehículo MXN$ "+carro.getPrecio());
+		    lblNewLabel_44.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_44.setBounds(25, 132, 255, 25);
+		    ticketDialog.add(lblNewLabel_44);
+		    
+		    lblNewLabel_45 = new JLabel("Por 1 dia");
+		    lblNewLabel_45.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_45.setBounds(25, 158, 255, 25);
+		    ticketDialog.add(lblNewLabel_45);
+		    
+		    lblNewLabel_46 = new JLabel(lblNewLabel_35_1_1_2.getText());
+		    lblNewLabel_46.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_46.setBounds(25, 187, 255, 25);
+		    ticketDialog.add(lblNewLabel_46);
+		    
+		    lblNewLabel_47 = new JLabel(lblNewLabel_35_1_1_2_1.getText());
+		    lblNewLabel_47.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_47.setBounds(25, 213, 255, 25);
+		    ticketDialog.add(lblNewLabel_47);
+		    
+		    lblNewLabel_48 = new JLabel("_____________________________");
+		    lblNewLabel_48.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_48.setBounds(25, 276, 255, 25);
+		    ticketDialog.add(lblNewLabel_48);
+		    
+		    lblNewLabel_49 = new JLabel("Pago realizado con "+comboBox_8.getSelectedItem());
+		    lblNewLabel_49.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		    lblNewLabel_49.setBounds(25, 300, 255, 25);
+		    ticketDialog.add(lblNewLabel_49);
+		    
+
+		    btnNewButton_13 = new JButton("Imprimir");
+		    btnNewButton_13.setBounds(100, 390, 100, 40);
+		    btnNewButton_13.setFocusable(false);
+		    btnNewButton_13.addActionListener(f -> {
+		        JOptionPane.showMessageDialog(ticketDialog, "Ticket impreso");
+		        ticketDialog.dispose();
+        		panelPrincipal.removeAll();
+        		menu();
+                repaint();
+		    });
+		    ticketDialog.add(btnNewButton_13);
+		    ticketDialog.setLocationRelativeTo(this);
+		    ticketDialog.setVisible(true);
+	    });
+	    panelPrincipal.add(btnNewButton_12_1);
+	    
+	    JButton btnNewButton_12 = new JButton("Calcular costo");
+	    btnNewButton_12.setForeground(Color.WHITE);
+	    btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD, 20));
+	    btnNewButton_12.setFocusable(false);
+	    btnNewButton_12.setBackground(Color.black);
+	    btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    btnNewButton_12.setBounds(764, 301, 309, 53);
+	    btnNewButton_12.addActionListener(e -> {
+	        int diaInicio = comboBox_4.getSelectedIndex() + 1; // Días del 1 al 31
+	        int mesInicio = comboBox_5.getSelectedIndex() + 1; // Meses de 1 a 12 (enero a diciembre)
+	        int añoInicio = (int) comboBox.getSelectedItem(); // Años (2024-2030)
+	        
+	        int diaFinal = comboBox_6.getSelectedIndex() + 1; // Días del 1 al 31
+	        int mesFinal = comboBox_7.getSelectedIndex() + 1; // Meses de 1 a 12 (enero a diciembre)
+	        int añoFinal = (int) comboBox8.getSelectedItem(); // Años (2024-2030)
+	        
+	        LocalDate fechaInicio = LocalDate.of(añoInicio, mesInicio, diaInicio);
+	        LocalDate fechaFinal = LocalDate.of(añoFinal, mesFinal, diaFinal);
+	        
+	        if (fechaFinal.isAfter(fechaInicio)) {
+	            long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
+	            
+	            double precioDiario = carro.getPrecio();
+	            double costoTotal = dias * precioDiario;
+	            int dia = fechaInicio.getDayOfMonth();
+	            int mes = fechaInicio.getMonthValue();
+	            int año = fechaInicio.getYear();
+	            String fechaInicioString = dia + "/" + mes + "/" + año;
+	            
+	            lblNewLabel_40.setText(fechaInicioString);
+	            lblNewLabel_35_1_1_2.setText("Total de días: " + dias);
+	    	    lblNewLabel_35_1_1_2_1.setText("Monto total                MXN$ ");
+	    	    lblNewLabel_35_1_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+	    	    lblNewLabel_35_1_1_2_1.setForeground(Color.WHITE);
+	    	    lblNewLabel_35_1_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    	    lblNewLabel_35_1_1_2_1.setBounds(400, 496, 409, 38);
+	    	    panelPrincipal.add(lblNewLabel_35_1_1_2_1);
+	            lblNewLabel_35_1_1_2_1.setText("Monto total: MXN$ " + String.format("%.2f", costoTotal));
+	            btnNewButton_12_1.setEnabled(true);
+	            JOptionPane.showMessageDialog(null, "Costo calculado correctamente.");
+	            
+	        } else {
+	            JOptionPane.showMessageDialog(null, "La fecha final debe ser posterior a la fecha inicial.", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelPrincipal.add(btnNewButton_12);
+	    
+	    JLabel lblNewLabel_35 = new JLabel();
+	    lblNewLabel_35.setForeground(new Color(255, 255, 255));
+	    lblNewLabel_35.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_35.setText("Tu reserva en FastKing");
+	    
+	    lblNewLabel_35.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel_35.setBounds(400, 370, 309, 38);
+	    panelPrincipal.add(lblNewLabel_35);
+	    
+	    JLabel lblNewLabel_35_1 = new JLabel();
+	    lblNewLabel_35_1.setText("5.0/104 opiones ");
+	    lblNewLabel_35_1.setHorizontalAlignment(SwingConstants.RIGHT);
+	    lblNewLabel_35_1.setForeground(Color.WHITE);
+	    lblNewLabel_35_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    lblNewLabel_35_1.setBounds(400, 393, 323, 38);
+	    panelPrincipal.add(lblNewLabel_35_1);
+	    
+	    JLabel lblNewLabel_35_1_1 = new JLabel();
+	    lblNewLabel_35_1_1.setText("Valor del vehículo   MXN$ "+String.valueOf(carro.getPrecio()));
+	    lblNewLabel_35_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+	    lblNewLabel_35_1_1.setForeground(Color.WHITE);
+	    lblNewLabel_35_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    lblNewLabel_35_1_1.setBounds(400, 419, 309, 38);
+	    panelPrincipal.add(lblNewLabel_35_1_1);
+	    
+	    JLabel lblNewLabel_35_1_1_1 = new JLabel();
+	    lblNewLabel_35_1_1_1.setText("Precio por 1 DÍA");
+	    lblNewLabel_35_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+	    lblNewLabel_35_1_1_1.setForeground(Color.WHITE);
+	    lblNewLabel_35_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    lblNewLabel_35_1_1_1.setBounds(400, 447, 309, 38);
+	    panelPrincipal.add(lblNewLabel_35_1_1_1);
+
+	    JLabel lblNewLabel_38 = new JLabel();
+	    lblNewLabel_38.setBorder(new LineBorder(Color.black, 2));
+	    lblNewLabel_38.setBounds(359, 376, 729, 175);
+	    panelPrincipal.add(lblNewLabel_38);
+	    
+	    JLabel lblNewLabel_38_1 = new JLabel();
+	    lblNewLabel_38_1.setBorder(new LineBorder(Color.black, 2));
+	    lblNewLabel_38_1.setBounds(359, 156, 729, 213);
+	    panelPrincipal.add(lblNewLabel_38_1);
+	    
+	    JLabel lblNewLabel_38_1_1 = new JLabel();
+	    lblNewLabel_38_1_1.setBorder(new LineBorder(Color.black, 2));
+	    lblNewLabel_38_1_1.setBounds(76, 376, 267, 175);
+	    panelPrincipal.add(lblNewLabel_38_1_1);
+	}
+	
+	public String generarTicketAleatorio() {
+	    Random random = new Random();
+	    long ticketAleatorio = 1_000_000_000_000L + (long) (random.nextDouble() * 9_000_000_000_000L);
+	    return String.valueOf(ticketAleatorio);
 	}
 }
 
