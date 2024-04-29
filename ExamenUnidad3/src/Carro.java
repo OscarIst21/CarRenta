@@ -3,7 +3,8 @@ public class Carro {
 	String marca,modelo,transmision,imagen;
 	double precio;
 	int puertas,equipaje;
-	public Carro(String marca,String modelo,String transmision,int puertas,int equipaje,double precio,String imagen) {
+	String categoria;
+	public Carro(String marca,String modelo,String transmision,int puertas,int equipaje,double precio,String imagen,String categoria) {
 		 this.marca = marca;
 	        this.modelo = modelo;
 	        this.transmision = transmision;
@@ -11,7 +12,14 @@ public class Carro {
 	        this.equipaje = equipaje;
 	        this.precio = precio;
 	        this.imagen=imagen;
+	        this.categoria=categoria;
 	    }
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 	public String getMarca() {
 		return marca;
 	}
